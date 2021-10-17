@@ -47,8 +47,10 @@ class tableau:
         itera = 0
         
         while(True):
+            
             print(itera)
             print(self.base)
+            
             A_b = self.A[:,self.base]
             A_n = self.A[:,self.nobase]
             c_b=self.c[self.base]
