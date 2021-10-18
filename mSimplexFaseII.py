@@ -28,7 +28,7 @@ class tableau:
         #(c1,c2,...,cn) a (c1,c2,...,cn,0,0,,,,,0)
         #Es un vector columna
         self.c = np.zeros((self.p+self.n,1))
-       
+        c = c.reshape(self.n,1)
         self.c[:self.n]=c
         
         self.b = b.reshape(self.p,1)
@@ -87,9 +87,10 @@ class tableau:
                 z_0 = lambda_simplex.T@self.b
                 self.solucion[self.base]=(np.linalg.inv(A_b)@self.b).reshape(
                     1,self.p)
-                return (self.solucion,z_0,0,itera)
+                return (self.solucion[:self.n],z_0,0,itera)
                 
-            #PREGUNTAAA 
+            #PREGUNTAAA
+            #Dijo que sí
             self.ahorros[self.base]=0
             #Si existe un ahorro positivo, esa es la variable que debe entrar
             self.ahorros[self.nobase]=ahorros_nb
@@ -112,7 +113,7 @@ class tableau:
             #Ahora, vemos si el problema es no acotado
             if((H_e<=0).all()):
                 #El problema es no acotado y terminamos
-                return (self.solucion,0,1,itera)
+                return (self.solucion[self.base],0,1,itera)
             
             #h también está en vector columna
             h = np.linalg.solve(A_b, self.b)
@@ -145,24 +146,54 @@ class tableau:
             self.nobase = np.delete(np.arange(0,self.n+self.p),self.base)
             itera+=1
             
-            
+      
+def mSimplexFaseII(A,b,c):
+    tabla = tableau(A,b,c)
+    solucion = tabla.Simplex()
+    return solucion
+        
+# Ejemplo 1
 # A = np.array([[ 1,  1,  2],
-#        [ 1,  1, -1],
-#        [-1,  1,  1]])
+#         [ 1,  1, -1],
+#         [-1,  1,  1]])
 
 # b = np.array([[9],
-#        [2],
-#        [4]])
+#         [2],
+#         [4]])
 
 # c = np.array([[ 1],
-#        [ 1],
-#        [-4]])
+#         [ 1],
+#         [-4]])
 
 # tabla1 = tableau(A,b,c)
 # answ = tabla1.Simplex()
 # print(answ[0])
             
-            
+
+#Ejemplo 2
+
+# A = np.array([
+#     [1,-1],
+#     [1,1]
+#     ])
+# b = np.array([[2],[6]])
+# c = np.array([[1],[-1]])
+# tabla1 = tableau(A,b,c)
+# answ = tabla1.Simplex()
+# print(answ[0])      
+
+#Ejemplo 3
+
+# A = np.array([
+#     [-1,1],
+#     [1,0]
+#     ])
+# b = np.array([[0],[2]])
+# c = np.array([[0],[-1]])
+# tabla1 = tableau(A,b,c)
+# answ = tabla1.Simplex()
+# print(answ[0])          
+                
             
             
             
