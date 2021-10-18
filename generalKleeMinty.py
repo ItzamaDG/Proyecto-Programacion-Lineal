@@ -7,6 +7,7 @@ Created on Sun Oct 17 20:25:02 2021
 import numpy as np
 def generalKleeMinty(m):
     c = np.ones(m).reshape(m,1)
+    c *=-1
     A = np.zeros((m,m))
     b = np.zeros((m,1))
     
