@@ -7,6 +7,22 @@ Created on Sun Oct 17 20:25:02 2021
 import numpy as np
 
 def generalKleeMinty(m):
+    """
+    Parameters
+    ----------
+    m : Número de 
+    variables en el problema
+    KleeMinty
+
+    Returns
+    -------
+    A : Matriz de 
+    Restricciones
+    b : Lado derecho
+    c : Coeficiente
+    de costos
+
+    """
     c = np.ones(m).reshape(m,1)
     c *=-1
     A = np.tril(2*np.ones((m,m)),-1)+np.eye(m)

@@ -9,7 +9,20 @@ import numpy as np
 class tableau:
     
     def __init__(self,A,b,c):
+        """
         
+
+        Parameters
+        ----------
+        A : Matriz Rest
+        b : Lado Derecho
+        c : Coeficiente de Costos
+
+        Returns
+        -------
+        None.
+
+        """
         #Número de restricciones
         self.p = np.shape(A)[0]
         #Número de variables    
